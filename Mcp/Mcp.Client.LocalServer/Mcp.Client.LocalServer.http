@@ -1,0 +1,6 @@
+@Mcp.Client.LocalServer_HostAddress = http://localhost:5160
+
+GET {{Mcp.Client.LocalServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
