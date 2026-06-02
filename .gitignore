@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Mcp/.vs
+/Mcp/Mcp.Client/bin/Debug/net9.0
+/Mcp/Mcp.Client/obj/Debug/net9.0
+/Mcp/Mcp.Client/obj
