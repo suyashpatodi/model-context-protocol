@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel;
+﻿using Mcp.Client.RemoteServer.Plugins;
+using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using ModelContextProtocol.Client;
 
@@ -14,7 +15,12 @@ namespace Mcp.Client.RemoteServer.Helper
             var model = configuration.GetValue<string>("github:model") ?? string.Empty;
             var endpoint = configuration.GetValue<string>("github:endpoint") ?? string.Empty;
 
-            await AddRemoteServerTools(kernelBuilder, apiKey);
+            var mcpClient = await CreateMcpClient(apiKey);
+
+            services.AddSingleton<McpClient>(mcpClient);
+            kernelBuilder.Plugins.AddFromType<McpResource>();
+
+            await AddRemoteServerTools(kernelBuilder, mcpClient);
 
             kernelBuilder.AddOpenAIChatCompletion(modelId: model, apiKey: apiKey, httpClient: new HttpClient { BaseAddress = new Uri(endpoint) });
 
@@ -29,7 +35,7 @@ namespace Mcp.Client.RemoteServer.Helper
             return services;
         }
 
-        private static async Task AddRemoteServerTools(IKernelBuilder kernelBuilder, string apiKey)
+        private static async Task<McpClient> CreateMcpClient(string apiKey)
         {
             var options = new HttpClientTransportOptions()
             {
@@ -42,7 +48,11 @@ namespace Mcp.Client.RemoteServer.Helper
             };
 
             var mcpClient = await McpClient.CreateAsync(new HttpClientTransport(options));
+            return mcpClient;
+        }
 
+        private static async Task AddRemoteServerTools(IKernelBuilder kernelBuilder, McpClient mcpClient)
+        {
             IList<McpClientTool> tools = await mcpClient.ListToolsAsync();
 
             var allowedTools = new[] { "issue_write", "list_issues" };
@@ -52,5 +62,7 @@ namespace Mcp.Client.RemoteServer.Helper
 
             kernelBuilder.Plugins.AddFromFunctions("GS", filteredTools);
         }
+
+        public record McpResourceMenu(string MenuText);
     }
 }
