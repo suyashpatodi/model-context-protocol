@@ -9,3 +9,5 @@
 /Mcp/Mcp.Client.LocalServer/bin/Debug/net9.0
 /Mcp/Mcp.Client.LocalServer/obj/Debug/net9.0
 /Mcp/Mcp.Client.LocalServer/obj
+/Mcp/Mcp.Client.RemoteServer/bin/Debug/net9.0
+/Mcp/Mcp.Client.RemoteServer/obj
