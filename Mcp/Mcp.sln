@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcp.Client.LocalServer", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcp.Client.RemoteServer", "Mcp.Client.RemoteServer\Mcp.Client.RemoteServer.csproj", "{B2404F78-E0D9-477E-A462-8508FE4405EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcp.Server", "Mcp.Server\Mcp.Server.csproj", "{5591D255-0D1E-4236-9F8D-7C98F8259C38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B2404F78-E0D9-477E-A462-8508FE4405EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2404F78-E0D9-477E-A462-8508FE4405EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2404F78-E0D9-477E-A462-8508FE4405EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5591D255-0D1E-4236-9F8D-7C98F8259C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5591D255-0D1E-4236-9F8D-7C98F8259C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5591D255-0D1E-4236-9F8D-7C98F8259C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5591D255-0D1E-4236-9F8D-7C98F8259C38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

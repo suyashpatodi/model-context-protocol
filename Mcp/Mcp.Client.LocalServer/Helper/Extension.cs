@@ -11,6 +11,7 @@ namespace Mcp.Client.LocalServer.Helper
             var kernelBuilder = services.AddKernel();
 
             await AddLocalServerTools(kernelBuilder);
+            await AddCustomServerTools(kernelBuilder);
 
             var apiKey = configuration.GetValue<string>("github:apiKey") ?? string.Empty;
             var model = configuration.GetValue<string>("github:model") ?? string.Empty;
@@ -44,6 +45,22 @@ namespace Mcp.Client.LocalServer.Helper
 
             var functions = tools.Select(x => x.AsKernelFunction());
             kernelBuilder.Plugins.AddFromFunctions("FS", functions);
+        }
+        private static async Task AddCustomServerTools(IKernelBuilder kernelBuilder)
+        {
+            var options = new StdioClientTransportOptions()
+            {
+                Name = "Custom Server",
+                Command = "dotnet",
+                Arguments = ["run", "--project", "D:\\Github\\model-context-protocol\\Mcp\\Mcp.Server\\Mcp.Server.csproj"]
+            };
+
+            var mcpClient = await McpClient.CreateAsync(new StdioClientTransport(options));
+
+            IList<McpClientTool> tools = await mcpClient.ListToolsAsync();
+
+            var functions = tools.Select(x => x.AsKernelFunction());
+            kernelBuilder.Plugins.AddFromFunctions("CS", functions);
         }
     }
 }
